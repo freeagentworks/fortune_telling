@@ -1,0 +1,477 @@
+@keyframes sparkle {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}/* 数秘術占いWebアプリのスタイル */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hiragino Sans', 'Yu Gothic', '游ゴシック', 'Meiryo', sans-serif;
+    background: linear-gradient(135deg, #ffeef8 0%, #ffe8f3 25%, #ffd6e8 50%, #ffb3d6 75%, #ff99cc 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #8b4a8c;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 240, 245, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(255, 192, 203, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ヘッダー */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #ffeef8 100%);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3);
+    border: 3px solid #ffb3d6;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #da70d6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+header p {
+    font-size: 1.1em;
+    color: #8b4a8c;
+    font-weight: 500;
+}
+
+/* メインコンテンツ */
+main {
+    background: linear-gradient(135deg, #ffffff 0%, #fef9ff 100%);
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
+    margin-bottom: 20px;
+    border: 2px solid #ffb3d6;
+    position: relative;
+}
+
+main::before {
+    content: '🌸✨🌸';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+/* タブ */
+.tabs {
+    display: flex;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #ffe8f3 0%, #ffd6e8 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #ffb3d6;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+}
+
+.tab-button {
+    flex: 1;
+    padding: 18px 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #8b4a8c;
+    position: relative;
+}
+
+.tab-button::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.tab-button:hover {
+    background: rgba(255, 105, 180, 0.1);
+    transform: translateY(-2px);
+}
+
+.tab-button:hover::before {
+    width: 80%;
+}
+
+.tab-button.active {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.tab-button.active::before {
+    width: 100%;
+    background: white;
+}
+
+/* タブコンテンツ */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 入力セクション */
+.input-section {
+    margin-bottom: 30px;
+}
+
+.input-section h2 {
+    margin-bottom: 25px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #da70d6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.date-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.date-input label {
+    font-weight: bold;
+    color: #8b4a8c;
+    margin-right: 8px;
+    font-size: 1em;
+}
+
+.date-input input {
+    flex: 1;
+    min-width: 80px;
+    padding: 15px;
+    border: 2px solid #ffb3d6;
+    border-radius: 15px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #fef9ff 100%);
+    box-shadow: inset 0 2px 5px rgba(255, 182, 193, 0.1);
+}
+
+.date-input input:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.3), inset 0 2px 5px rgba(255, 182, 193, 0.1);
+    transform: translateY(-2px);
+}
+
+.name-input {
+    margin-bottom: 20px;
+}
+
+.name-input label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #8b4a8c;
+    font-size: 1.1em;
+}
+
+.name-input input {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid #ffb3d6;
+    border-radius: 15px;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #fef9ff 100%);
+    box-shadow: inset 0 2px 5px rgba(255, 182, 193, 0.1);
+}
+
+.name-input input:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.3), inset 0 2px 5px rgba(255, 182, 193, 0.1);
+    transform: translateY(-2px);
+}
+
+/* 計算ボタン */
+.calculate-btn {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #da70d6 100%);
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto;
+    display: block;
+}
+
+.calculate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.calculate-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.5);
+}
+
+.calculate-btn:hover::before {
+    left: 100%;
+}
+
+/* 結果セクション */
+.result-section {
+    min-height: 200px;
+    margin-top: 30px;
+}
+
+.result-card {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #da70d6 100%);
+    color: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.result-card::before {
+    content: '🌸✨🌸✨🌸';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5em;
+    opacity: 0.7;
+}
+
+.result-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+.result-number {
+    font-size: 5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ffffff, #ffe8f3, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 2;
+}
+
+.result-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+}
+
+.result-traits {
+    background: rgba(255,255,255,0.25);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
+}
+
+.result-traits h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.traits-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.trait-tag {
+    background: rgba(255,255,255,0.4);
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.95em;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(3px);
+    transition: all 0.3s ease;
+}
+
+.trait-tag:hover {
+    background: rgba(255,255,255,0.6);
+    transform: scale(1.05);
+}
+
+.result-advice {
+    background: rgba(255,255,255,0.25);
+    padding: 20px;
+    border-radius: 15px;
+    font-style: italic;
+    font-size: 1.15em;
+    font-weight: 500;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
+}
+
+/* エラーメッセージ */
+.error-message {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8a9b 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+    font-weight: 500;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    color: #8b4a8c;
+    opacity: 0.9;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin-top: 20px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    font-weight: 500;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .date-input {
+        flex-direction: column;
+    }
+    
+    .date-input input {
+        min-width: 100%;
+    }
+    
+    .result-number {
+        font-size: 3em;
+    }
+    
+    .traits-list {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算命学占い - あなたの運命を読み解く</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-decoration">
+                <div class="star-pattern"></div>
+                <div class="star-pattern"></div>
+                <div class="star-pattern"></div>
+            </div>
+            <h1 class="main-title">
+                <span class="title-decoration">✦</span>
+                算命学占い
+                <span class="title-decoration">✦</span>
+            </h1>
+            <p class="subtitle">古代中国4000年の叡智で読み解く、あなたの宿命と運命</p>
+        </header>
+
+        <main>
+            <!-- 入力セクション -->
+            <section class="input-section" id="inputSection">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>生年月日を入力してください</h2>
+                        <p class="description">あなたの生まれた日から、宿命の星々を導き出します</p>
+                    </div>
+                    <div class="card-body">
+                        <form id="birthdateForm">
+                            <div class="form-group">
+                                <label for="year">年</label>
+                                <select id="year" required>
+                                    <option value="">選択してください</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="month">月</label>
+                                <select id="month" required>
+                                    <option value="">選択してください</option>
+                                    <option value="1">1月</option>
+                                    <option value="2">2月</option>
+                                    <option value="3">3月</option>
+                                    <option value="4">4月</option>
+                                    <option value="5">5月</option>
+                                    <option value="6">6月</option>
+                                    <option value="7">7月</option>
+                                    <option value="8">8月</option>
+                                    <option value="9">9月</option>
+                                    <option value="10">10月</option>
+                                    <option value="11">11月</option>
+                                    <option value="12">12月</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="day">日</label>
+                                <select id="day" required>
+                                    <option value="">選択してください</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text">占う</span>
+                                <span class="btn-decoration">→</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 結果セクション -->
+            <section class="result-section hidden" id="resultSection">
+                <!-- 人体星図 -->
+                <div class="card result-card">
+                    <div class="card-header">
+                        <h2>あなたの人体星図</h2>
+                        <p class="description">陽占法による星の配置</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="human-chart">
+                            <div class="chart-position north" id="northStar">
+                                <div class="star-icon">🌟</div>
+                                <div class="position-label">北（頭）</div>
+                                <div class="star-name"></div>
+                                <div class="star-desc">あなたの表面意識</div>
+                            </div>
+                            <div class="chart-position east" id="eastStar">
+                                <div class="star-icon">⭐</div>
+                                <div class="position-label">東（左手）</div>
+                                <div class="star-name"></div>
+                                <div class="star-desc">社会・仕事運</div>
+                            </div>
+                            <div class="chart-position center" id="centerStar">
+                                <div class="star-icon">✨</div>
+                                <div class="position-label">中央（胸）</div>
+                                <div class="star-name"></div>
+                                <div class="star-desc">本質・主星</div>
+                            </div>
+                            <div class="chart-position west" id="westStar">
+                                <div class="star-icon">🌠</div>
+                                <div class="position-label">西（右手）</div>
+                                <div class="star-name"></div>
+                                <div class="star-desc">家庭・配偶者</div>
+                            </div>
+                            <div class="chart-position south" id="southStar">
+                                <div class="star-icon">💫</div>
+                                <div class="position-label">南（腹）</div>
+                                <div class="star-name"></div>
+                                <div class="star-desc">部下・子供</div>
+                            </div>
+                        </div>
+                        <div class="sub-stars">
+                            <div class="sub-star" id="leftShoulderStar">
+                                <div class="sub-star-label">左肩（初年）</div>
+                                <div class="sub-star-name"></div>
+                            </div>
+                            <div class="sub-star" id="leftFootStar">
+                                <div class="sub-star-label">左足（中年）</div>
+                                <div class="sub-star-name"></div>
+                            </div>
+                            <div class="sub-star" id="rightFootStar">
+                                <div class="sub-star-label">右足（晩年）</div>
+                                <div class="sub-star-name"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 十大主星の解説 -->
+                <div class="card result-card">
+                    <div class="card-header">
+                        <h2>十大主星の意味</h2>
+                        <p class="description">あなたの精神世界を表す星々</p>
+                    </div>
+                    <div class="card-body">
+                        <div id="mainStarExplanation" class="star-explanation"></div>
+                    </div>
+                </div>
+
+                <!-- 十二大従星の解説 -->
+                <div class="card result-card">
+                    <div class="card-header">
+                        <h2>十二大従星の意味</h2>
+                        <p class="description">人生のエネルギーと運勢の流れ</p>
+                    </div>
+                    <div class="card-body">
+                        <div id="subStarExplanation" class="star-explanation"></div>
+                        <div class="energy-meter">
+                            <h3>総合エネルギー値</h3>
+                            <div class="energy-bar">
+                                <div class="energy-fill" id="energyFill"></div>
+                            </div>
+                            <div class="energy-value" id="energyValue"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 天中殺 -->
+                <div class="card result-card">
+                    <div class="card-header">
+                        <h2>天中殺</h2>
+                        <p class="description">運気のバイオリズム</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="tenchusatsu-info">
+                            <div class="tenchusatsu-type" id="tenchusatsuType"></div>
+                            <div class="tenchusatsu-period" id="tenchusatsuPeriod"></div>
+                            <div class="tenchusatsu-desc" id="tenchusatsuDesc"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 総合鑑定 -->
+                <div class="card result-card">
+                    <div class="card-header">
+                        <h2>総合鑑定</h2>
+                        <p class="description">あなたの宿命と開運アドバイス</p>
+                    </div>
+                    <div class="card-body">
+                        <div id="overallReading" class="overall-reading"></div>
+                    </div>
+                </div>
+
+                <button class="reset-btn" onclick="resetForm()">もう一度占う</button>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2025 算命学占い - 古代中国の叡智</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

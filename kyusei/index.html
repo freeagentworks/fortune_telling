@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九星気学占い</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 2em;
+            animation: sparkle 2s ease-in-out infinite alternate;
+        }
+
+        .header::after {
+            content: '🌟';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            animation: sparkle 2s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+            100% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .input-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            background: white;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+            min-width: 200px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-section {
+            display: none;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .star-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .star-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .star-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .star-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin-right: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .star-info h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .star-info .star-type {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .star-details {
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 10px;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .detail-item h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        .detail-item p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .compatibility-section {
+            background: linear-gradient(135deg, #cfecd0 0%, #a8e6cf 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .compatibility-section h4 {
+            color: #2d5a3d;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+
+        .compatibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .compatibility-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .compatibility-level {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .excellent { color: #e74c3c; }
+        .good { color: #f39c12; }
+        .fair { color: #3498db; }
+        .poor { color: #95a5a6; }
+
+        .note {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #fdcb6e;
+        }
+
+        .note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .note p {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .star-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .star-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .compatibility-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>九星気学占い</h1>
+            <p>あなたの運命の星を知り、人生を豊かに導きましょう</p>
+        </div>
+        
+        <div class="content">
+            <div class="input-section">
+                <h2>🌟 生年月日を入力してください</h2>
+                <div class="form-group">
+                    <label for="birthYear">生まれ年</label>
+                    <input type="number" id="birthYear" placeholder="例: 1990" min="1900" max="2030">
+                </div>
+                <div class="form-group">
+                    <label for="birthMonth">生まれ月</label>
+                    <select id="birthMonth">
+                        <option value="">月を選択</option>
+                        <option value="1">1月</option>
+                        <option value="2">2月</option>
+                        <option value="3">3月</option>
+                        <option value="4">4月</option>
+                        <option value="5">5月</option>
+                        <option value="6">6月</option>
+                        <option value="7">7月</option>
+                        <option value="8">8月</option>
+                        <option value="9">9月</option>
+                        <option value="10">10月</option>
+                        <option value="11">11月</option>
+                        <option value="12">12月</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="birthDay">生まれ日</label>
+                    <input type="number" id="birthDay" placeholder="例: 15" min="1" max="31">
+                </div>
+                <button class="btn" onclick="calculateStar()">🔮 運命の星を占う</button>
+            </div>
+            
+            <div class="result-section" id="resultSection">
+                <!-- 結果がここに表示されます -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 九星気学のデータ
+        const starData = {
+            1: {
+                name: "一白水星",
+                element: "水",
+                color: "#4a90e2",
+                icon: "💧",
+                description: "水のように柔軟で順応性のある星",
+                personality: "穏やかで高い順応性を持ち、人当たりが良く交際上手です。思慮深く協調性があり、周囲をまとめることができます。",
+                love: "じっくりと時間をかけて愛を育むタイプ。相手の気持ちを大切にし、献身的な愛情を注ぎます。",
+                work: "交渉役や調整役として重宝されます。チームワークを重視する職場で力を発揮します。",
+                lucky: "中年期以降に運気が開花。それまでの苦労が実を結び、安定した人生を送れます。",
+                compatible: {
+                    excellent: ["三碧木星", "四緑木星"],
+                    good: ["六白金星", "七赤金星"],
+                    fair: ["一白水星", "九紫火星"],
+                    poor: ["二黒土星", "五黄土星", "八白土星"]
+                }
+            },
+            2: {
+                name: "二黒土星",
+                element: "土",
+                color: "#8b4513",
+                icon: "🌍",
+                description: "母なる大地のような包容力を持つ星",
+                personality: "温厚で思いやりにあふれ、面倒見が良い性格です。マイペースで穏やかですが、やる気になると誰にも止められないパワーを発揮します。",
+                love: "家庭的で安定した関係を築くのが得意。相手を包み込むような愛情で、長続きする恋愛をします。",
+                work: "コツコツと努力を積み重ねる職種に向いています。サポート役として組織を支える力があります。",
+                lucky: "大器晩成型で、晩年に大きな成功を収めます。継続は力なりを体現する人生です。",
+                compatible: {
+                    excellent: ["九紫火星"],
+                    good: ["六白金星", "七赤金星"],
+                    fair: ["二黒土星", "五黄土星", "八白土星"],
+                    poor: ["一白水星", "三碧木星", "四緑木星"]
+                }
+            },
+            3: {
+                name: "三碧木星",
+                element: "木",
+                color: "#2ecc71",
+                icon: "🌳",
+                description: "雷のように力強く成長する木の星",
+                personality: "好奇心旺盛で周囲に元気を与える存在です。興味のあることは徹底的に深掘りし、その知識を活かす行動力があります。",
+                love: "情熱的で積極的なアプローチをします。恋愛においても新鮮さと刺激を求める傾向があります。",
+                work: "新しいことに挑戦する職業や、クリエイティブな分野で才能を発揮します。",
+                lucky: "若いうちから才能を発揮し、行動力で運を切り開いていきます。",
+                compatible: {
+                    excellent: ["一白水星", "九紫火星"],
+                    good: ["三碧木星", "四緑木星"],
+                    fair: ["六白金星", "七赤金星"],
+                    poor: ["二黒土星", "五黄土星", "八白土星"]
+                }
+            },
+            4: {
+                name: "四緑木星",
+                element: "木",
+                color: "#27ae60",
+                icon: "🌿",
+                description: "風のように自由で社交的な木の星",
+                personality: "社交的でコミュニケーション能力が非常に高く、程よい距離感で幅広い層から好かれます。自由を愛する性格です。",
+                love: "相手の個性を尊重し、お互いの自由を大切にする関係を築きます。束縛を嫌います。",
+                work: "営業や接客、コミュニケーションが重要な職業で力を発揮します。",
+                lucky: "人との繋がりから運が開けます。ネットワークを大切にすることで成功を掴みます。",
+                compatible: {
+                    excellent: ["一白水星", "九紫火星"],
+                    good: ["三碧木星", "四緑木星"],
+                    fair: ["六白金星", "七赤金星"],
+                    poor: ["二黒土星", "五黄土星", "八白土星"]
+                }
+            },
+            5: {
+                name: "五黄土星",
+                element: "土",
+                color: "#f1c40f",
+                icon: "👑",
+                description: "帝王の星と呼ばれる最も強力な星",
+                personality: "強いリーダーシップと存在感を持ち、他の星を従える力があります。責任感が強く、困難に立ち向かう勇気があります。",
+                love: "情熱的で一途な愛情を注ぎます。相手を守りたいという気持ちが強く、献身的です。",
+                work: "経営者や管理職、リーダーとして組織を率いる力があります。",
+                lucky: "波乱万丈な人生ですが、最終的には大きな成功を収めます。",
+                compatible: {
+                    excellent: ["九紫火星"],
+                    good: ["六白金星", "七赤金星"],
+                    fair: ["二黒土星", "五黄土星", "八白土星"],
+                    poor: ["一白水星", "三碧木星", "四緑木星"]
+                }
+            },
+            6: {
+                name: "六白金星",
+                element: "金",
+                color: "#95a5a6",
+                icon: "⚪",
+                description: "原石のような純粋で高貴な金の星",
+                personality: "品格があり責任感が強く、真面目で完璧主義者です。高いプライドと経営者の資質を持っています。",
+                love: "真剣で誠実な恋愛を求めます。結婚に対して責任感を持ち、家族を大切にします。",
+                work: "管理職や専門職で力を発揮します。品質や完成度にこだわる仕事に向いています。",
+                lucky: "中年期に最も運気が高まり、地位や名誉を得ることができます。",
+                compatible: {
+                    excellent: ["一白水星"],
+                    good: ["二黒土星", "五黄土星", "八白土星"],
+                    fair: ["六白金星", "七赤金星"],
+                    poor: ["三碧木星", "四緑木星", "九紫火星"]
+                }
+            },
+            7: {
+                name: "七赤金星",
+                element: "金",
+                color: "#e74c3c",
+                icon: "🔴",
+                description: "精錬された金のような華やかな星",
+                personality: "明るく社交的で、話術に長けています。楽しいことが好きで、周囲を和ませる才能があります。",
+                love: "恋愛上手で魅力的。楽しい時間を共有することを重視し、相手を喜ばせるのが得意です。",
+                work: "接客業や芸能関係、人を楽しませる職業で才能を発揮します。",
+                lucky: "若いうちから人気を集め、中年期にかけて安定した運気を保ちます。",
+                compatible: {
+                    excellent: ["一白水星"],
+                    good: ["二黒土星", "五黄土星", "八白土星"],
+                    fair: ["六白金星", "七赤金星"],
+                    poor: ["三碧木星", "四緑木星", "九紫火星"]
+                }
+            },
+            8: {
+                name: "八白土星",
+                element: "土",
+                color: "#8b4513",
+                icon: "⛰️",
+                description: "高い山のような威厳と安定感を持つ星",
+                personality: "意志が強く粘り強い性格で、一度決めたことは最後までやり遂げます。堅実で信頼される人柄です。",
+                love: "真面目で一途な愛情を注ぎます。安定した家庭を築くことを重視します。",
+                work: "不動産や建設業など、土に関わる職業や、堅実な事業で成功します。",
+                lucky: "晩年に大きな財産や地位を築きます。継続的な努力が実を結ぶ人生です。",
+                compatible: {
+                    excellent: ["九紫火星"],
+                    good: ["六白金星", "七赤金星"],
+                    fair: ["二黒土星", "五黄土星", "八白土星"],
+                    poor: ["一白水星", "三碧木星", "四緑木星"]
+                }
+            },
+            9: {
+                name: "九紫火星",
+                element: "火",
+                color: "#e74c3c",
+                icon: "🔥",
+                description: "火のように情熱的で華やかな星",
+                personality: "華やかで美的センスがあり、情熱的な性格です。直感力に優れ、芸術的な才能を持っています。",
+                love: "ロマンチックで情熱的な恋愛を好みます。美しいものや感動的な体験を相手と共有したがります。",
+                work: "芸術関係やファッション、美容関係で才能を発揮します。人目につく職業が向いています。",
+                lucky: "若いうちから注目を集め、中年期にかけて名声や人気を得ることができます。",
+                compatible: {
+                    excellent: ["二黒土星", "五黄土星", "八白土星"],
+                    good: ["三碧木星", "四緑木星"],
+                    fair: ["一白水星", "九紫火星"],
+                    poor: ["六白金星", "七赤金星"]
+                }
+            }
+        };
+
+        function calculateStar() {
+            const year = parseInt(document.getElementById('birthYear').value);
+            const month = parseInt(document.getElementById('birthMonth').value);
+            const day = parseInt(document.getElementById('birthDay').value);
+
+            if (!year || !month || !day) {
+                alert('生年月日を正しく入力してください');
+                return;
+            }
+
+            // 九星気学では立春（2月4日頃）が年の始まり
+            let calculationYear = year;
+            if (month === 1 || (month === 2 && day <= 3)) {
+                calculationYear = year - 1;
+            }
+
+            // 本命星の計算（西暦の各桁を足して11から引く）
+            const yearDigits = calculationYear.toString().split('').map(Number);
+            let sum = yearDigits.reduce((a, b) => a + b, 0);
+            
+            // 2桁の場合は更に各桁を足す
+            if (sum >= 10) {
+                const sumDigits = sum.toString().split('').map(Number);
+                sum = sumDigits.reduce((a, b) => a + b, 0);
+            }
+
+            const starNumber = 11 - sum;
+            const adjustedStarNumber = starNumber <= 0 ? starNumber + 9 : starNumber;
+
+            displayResult(adjustedStarNumber);
+        }
+
+        function displayResult(starNumber) {
+            const star = starData[starNumber];
+            const resultSection = document.getElementById('resultSection');
+            
+            resultSection.innerHTML = `
+                <div class="star-card">
+                    <div class="star-header">
+                        <div class="star-icon" style="background: ${star.color}">
+                            ${star.icon}
+                        </div>
+                        <div class="star-info">
+                            <h3>${star.name}</h3>
+                            <p class="star-type">${star.element}の精気 - ${star.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="star-details">
+                        <div class="detail-item">
+                            <h4>🌟 基本性格</h4>
+                            <p>${star.personality}</p>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <h4>💕 恋愛傾向</h4>
+                            <p>${star.love}</p>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <h4>💼 仕事・適職</h4>
+                            <p>${star.work}</p>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <h4>🍀 運勢の流れ</h4>
+                            <p>${star.lucky}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="compatibility-section">
+                        <h4>💫 相性診断</h4>
+                        <div class="compatibility-grid">
+                            <div class="compatibility-item">
+                                <div class="compatibility-level excellent">★★★ 最高の相性</div>
+                                <p>${star.compatible.excellent.join('、')}</p>
+                            </div>
+                            <div class="compatibility-item">
+                                <div class="compatibility-level good">★★☆ 良い相性</div>
+                                <p>${star.compatible.good.join('、')}</p>
+                            </div>
+                            <div class="compatibility-item">
+                                <div class="compatibility-level fair">★☆☆ 普通の相性</div>
+                                <p>${star.compatible.fair.join('、')}</p>
+                            </div>
+                            <div class="compatibility-item">
+                                <div class="compatibility-level poor">☆☆☆ 注意が必要</div>
+                                <p>${star.compatible.poor.join('、')}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <h4>📝 九星気学について</h4>
+                    <p>九星気学は古代中国から伝わる占術で、宇宙のエネルギー「精気」の循環から運勢を読み解きます。あなたの本命星を知ることで、生まれ持った性格や運命の流れ、他者との相性を理解し、より良い人生を歩むヒントを得ることができます。</p>
+                </div>
+            `;
+            
+            resultSection.style.display = 'block';
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // エンターキーでの実行
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateStar();
+            }
+        });
+    </script>
+</body>
+</html>

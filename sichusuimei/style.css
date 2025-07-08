@@ -1,0 +1,1043 @@
+/* ベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ヘッダー */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.header-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.app-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #4a5568;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-title i {
+    color: #667eea;
+    margin-right: 15px;
+    animation: spin 3s linear infinite;
+}
+
+.app-subtitle {
+    font-size: 1.1rem;
+    color: #718096;
+    font-weight: 300;
+}
+
+/* カードスタイル */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeInUp 0.8s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: #667eea;
+    font-size: 1.3rem;
+}
+
+/* フォームスタイル */
+.birth-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-group select {
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group select:hover {
+    border-color: #a0aec0;
+}
+
+/* ボタンスタイル */
+.fortune-btn {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.fortune-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.fortune-btn:hover::before {
+    left: 100%;
+}
+
+.fortune-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+.fortune-btn:active {
+    transform: translateY(0);
+}
+
+/* 命式テーブル */
+.meishiki-table {
+    background: #f7fafc;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.meishiki-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pillar {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.pillar:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.pillar-title {
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.pillar-content {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.pillar-reading {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-top: 5px;
+}
+
+/* 五行チャート */
+.gogyou-chart {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.gogyou-element {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.gogyou-element::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 15px 15px 0 0;
+}
+
+.gogyou-element.wood::before { background: #48bb78; }
+.gogyou-element.fire::before { background: #f56565; }
+.gogyou-element.earth::before { background: #d69e2e; }
+.gogyou-element.metal::before { background: #a0aec0; }
+.gogyou-element.water::before { background: #4299e1; }
+
+.gogyou-element:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.gogyou-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.gogyou-name {
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 5px;
+}
+
+.gogyou-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+/* 性格コンテンツ */
+.personality-content {
+    background: #f7fafc;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.personality-trait {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.trait-title {
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trait-description {
+    color: #718096;
+    line-height: 1.6;
+}
+
+/* 運勢セクション */
+.fortune-2025 {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+}
+
+.fortune-score {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #d53f8c;
+    margin-bottom: 10px;
+}
+
+.fortune-level {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.fortune-description {
+    color: #718096;
+    line-height: 1.6;
+}
+
+/* 相性診断 */
+.compatibility-form {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.form-row select {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+}
+
+.compatibility-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.compatibility-btn:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+.compatibility-result {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+    display: none;
+}
+
+.compatibility-score {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.compatibility-percentage {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #d53f8c;
+}
+
+.compatibility-level {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-top: 5px;
+}
+
+/* フッター */
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+/* アニメーション */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 10px;
+    }
+    
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    .birth-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .meishiki-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gogyou-chart {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-row select {
+        min-width: 100%;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .meishiki-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gogyou-chart {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .app-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* 特殊効果 */
+.sparkle {
+    position: relative;
+    overflow: hidden;
+}
+
+.sparkle::after {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    animation: twinkle 2s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ローディングアニメーション */
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+/* ==============================================
+   レスポンシブ対応 - 追加スタイル
+   ============================================== */
+
+/* タブレット用スタイル (481px - 768px) */
+@media (min-width: 481px) {
+    .app-container {
+        padding: 15px;
+    }
+    
+    .header-content {
+        padding: 25px 20px;
+    }
+    
+    .app-title {
+        font-size: 2.2rem;
+    }
+    
+    .app-subtitle {
+        font-size: 1rem;
+    }
+    
+    .card {
+        padding: 25px 20px;
+        margin-bottom: 25px;
+    }
+    
+    .birth-form {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+    
+    .fortune-btn {
+        grid-column: 1 / -1;
+        max-width: 300px;
+        margin: 15px auto 0;
+    }
+    
+    .meishiki-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .gogyou-chart {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .form-row {
+        grid-template-columns: repeat(3, 1fr) auto;
+        align-items: end;
+    }
+    
+    .compatibility-btn {
+        margin-top: 0;
+        padding: 12px 24px;
+    }
+}
+
+/* デスクトップ用スタイル (769px+) */
+@media (min-width: 769px) {
+    .app-container {
+        padding: 20px;
+    }
+    
+    .header {
+        margin-bottom: 40px;
+    }
+    
+    .header-content {
+        padding: 30px;
+        border-radius: 20px;
+    }
+    
+    .app-title {
+        font-size: 2.5rem;
+    }
+    
+    .app-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .card {
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+    
+    .section-title i {
+        font-size: 1.3rem;
+    }
+    
+    .birth-form {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .fortune-btn {
+        grid-column: 1 / -1;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        max-width: 400px;
+        margin: 20px auto 0;
+    }
+    
+    .meishiki-table {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .meishiki-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .pillar {
+        padding: 15px;
+    }
+    
+    .pillar-title {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    
+    .pillar-content {
+        font-size: 1.2rem;
+    }
+    
+    .pillar-reading {
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+    
+    .gogyou-chart {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .gogyou-element {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .gogyou-element::before {
+        height: 4px;
+    }
+    
+    .gogyou-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .gogyou-name {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    
+    .gogyou-count {
+        font-size: 1.5rem;
+    }
+    
+    .personality-content {
+        padding: 25px;
+        border-radius: 15px;
+    }
+    
+    .personality-trait {
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border-left-width: 4px;
+    }
+    
+    .trait-title {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+    
+    .trait-description {
+        font-size: 1rem;
+    }
+    
+    .fortune-2025 {
+        padding: 25px;
+        border-radius: 15px;
+    }
+    
+    .fortune-score {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+    
+    .fortune-level {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .fortune-description {
+        font-size: 1rem;
+    }
+    
+    .form-row {
+        grid-template-columns: repeat(3, 1fr) auto;
+        gap: 15px;
+        align-items: end;
+    }
+    
+    .form-row select {
+        min-width: 120px;
+    }
+    
+    .compatibility-btn {
+        padding: 10px 20px;
+        margin-top: 0;
+    }
+    
+    .compatibility-result {
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 10px;
+    }
+    
+    .compatibility-percentage {
+        font-size: 2.5rem;
+    }
+    
+    .compatibility-level {
+        font-size: 1.1rem;
+        margin-top: 5px;
+    }
+    
+    .footer {
+        margin-top: 50px;
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 大型デスクトップ用 (1200px+) */
+@media (min-width: 1200px) {
+    .app-container {
+        padding: 30px;
+    }
+    
+    .birth-form {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .fortune-btn {
+        grid-column: 2 / 5;
+    }
+}
+
+/* 高解像度ディスプレイ対応 (1400px+) */
+@media (min-width: 1400px) {
+    .app-title {
+        font-size: 3rem;
+    }
+    
+    .app-subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .card {
+        padding: 40px;
+    }
+}
+
+/* ダークモード対応（システム設定に基づく） */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(45, 55, 72, 0.95);
+        color: #e2e8f0;
+    }
+    
+    .header-content {
+        background: rgba(45, 55, 72, 0.95);
+        color: #e2e8f0;
+    }
+    
+    .app-title {
+        color: #e2e8f0;
+    }
+    
+    .app-subtitle {
+        color: #a0aec0;
+    }
+    
+    .section-title {
+        color: #e2e8f0;
+    }
+    
+    .form-group select {
+        background: #2d3748;
+        color: #e2e8f0;
+        border-color: #4a5568;
+    }
+    
+    .pillar {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .pillar-title {
+        color: #a0aec0;
+    }
+    
+    .pillar-content {
+        color: #e2e8f0;
+    }
+    
+    .gogyou-element {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .personality-trait {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .trait-title {
+        color: #a0aec0;
+    }
+    
+    .trait-description {
+        color: #cbd5e0;
+    }
+    
+    .meishiki-table {
+        background: #2d3748;
+    }
+    
+    .personality-content {
+        background: #2d3748;
+    }
+    
+    .compatibility-result {
+        background: #2d3748;
+    }
+}
+
+/* アクセシビリティ対応 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .sparkle::after {
+        animation: none;
+    }
+}
+
+/* 印刷スタイル */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .app-container {
+        max-width: none;
+        padding: 20px;
+    }
+    
+    .card {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+    
+    .fortune-btn,
+    .compatibility-btn {
+        display: none;
+    }
+    
+    .header {
+        page-break-after: avoid;
+    }
+    
+    .section-title {
+        page-break-after: avoid;
+    }
+}
+
+/* フォーカス管理（キーボードナビゲーション） */
+select:focus,
+button:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* タッチデバイス用の調整 */
+@media (hover: none) and (pointer: coarse) {
+    .card:hover {
+        transform: none;
+    }
+    
+    .pillar:hover {
+        transform: none;
+        border-color: transparent;
+    }
+    
+    .gogyou-element:hover {
+        transform: none;
+    }
+    
+    .fortune-btn:hover {
+        transform: none;
+    }
+    
+    .compatibility-btn:hover {
+        transform: none;
+    }
+}
+
+/* 横向き表示での調整 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .header {
+        margin-bottom: 15px;
+    }
+    
+    .header-content {
+        padding: 15px;
+    }
+    
+    .app-title {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+    
+    .app-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .footer {
+        margin-top: 20px;
+        padding: 10px;
+    }
+}
+
+/* 非常に小さな画面用 (320px以下) */
+@media (max-width: 320px) {
+    .app-container {
+        padding: 8px;
+    }
+    
+    .card {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .app-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    .gogyou-chart {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-group select {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .fortune-btn {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* iPhone SE などの小型デバイス対応 */
+@media (max-width: 375px) {
+    .app-title {
+        font-size: 1.6rem;
+    }
+    
+    .pillar-content {
+        font-size: 1.2rem;
+    }
+    
+    .fortune-score {
+        font-size: 2rem;
+    }
+    
+    .compatibility-percentage {
+        font-size: 1.8rem;
+    }
+}
+
+/* 大型スマートフォン対応 */
+@media (min-width: 376px) and (max-width: 480px) {
+    .gogyou-chart {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .meishiki-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

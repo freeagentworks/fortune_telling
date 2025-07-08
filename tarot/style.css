@@ -1,0 +1,129 @@
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    text-align: center;
+    background: linear-gradient(to right top, #4b0082, #000000);
+    color: #f0f0f0;
+    padding: 25px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    color: #e6e6fa;
+    text-shadow: 0 0 10px #e6e6fa, 0 0 20px #e6e6fa, 0 0 30px #e6e6fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.input-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    display: inline-block;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+}
+
+.input-section label {
+    display: block;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #d8bfd8;
+}
+
+.input-section input {
+    width: 400px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #d8bfd8;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #f0f0f0;
+    font-size: 1.2em;
+    margin-right: 15px;
+}
+
+#start-button {
+    background: linear-gradient(45deg, #8a2be2, #4b0082);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.4em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#start-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #8a2be2;
+}
+
+#card-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 30px;
+}
+
+.card-wrapper {
+    text-align: center;
+    width: 280px;
+}
+
+.card-wrapper h4 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #d8bfd8;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 250px;
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+    margin: 0 auto;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    color: #4b0082;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
+.card-image-frame {
+    border: 5px solid #d8bfd8;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: #e6e6fa;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.card-meaning {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+}
+

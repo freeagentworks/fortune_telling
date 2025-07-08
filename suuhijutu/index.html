@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数秘術占い</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌸✨ かわいい数秘術占い ✨🌸</h1>
+            <p>🌟 あなたの運命の数字を見つけて、素敵な未来を占いましょう 🌟</p>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('birthdate')">🎂 お誕生日占い</button>
+                <button class="tab-button" onclick="showTab('name')">💖 お名前占い</button>
+            </div>
+
+            <!-- 生年月日占いタブ -->
+            <div id="birthdate-tab" class="tab-content active">
+                <div class="input-section">
+                    <h2>🌈 お誕生日からあなたの運命数を見つけよう♡</h2>
+                    <div class="date-input">
+                        <label for="birth-year">年:</label>
+                        <input type="number" id="birth-year" min="1900" max="2024" placeholder="1990">
+                        
+                        <label for="birth-month">月:</label>
+                        <input type="number" id="birth-month" min="1" max="12" placeholder="5">
+                        
+                        <label for="birth-day">日:</label>
+                        <input type="number" id="birth-day" min="1" max="31" placeholder="15">
+                    </div>
+                    <button onclick="calculateLifePathNumber()" class="calculate-btn">🌟 運命数を計算しちゃおう♡</button>
+                </div>
+            </div>
+
+            <!-- 名前占いタブ -->
+            <div id="name-tab" class="tab-content">
+                <div class="input-section">
+                    <h2>🎀 お名前からあなたの特別な数字を見つけよう♡</h2>
+                    <div class="name-input">
+                        <label for="name">🌸 お名前（ローマ字）:</label>
+                        <input type="text" id="name" placeholder="Taro Yamada">
+                    </div>
+                    <button onclick="calculateNameNumber()" class="calculate-btn">🎆 特別な数字を計算しちゃおう♡</button>
+                </div>
+            </div>
+
+            <!-- 結果表示エリア -->
+            <div id="result-section" class="result-section">
+                <div id="result-content">
+                    <!-- 結果がここに表示されます -->
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>🌸✨ 2025 数秘術占い - あなたの素敵な未来を数字で占います ✨🌸</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

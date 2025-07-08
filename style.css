@@ -1,0 +1,111 @@
+body {
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+    text-align: center;
+    background: linear-gradient(to right top, #654ea3, #eaafc8);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.menu-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    max-width: 1000px;
+    width: 95%;
+    backdrop-filter: blur(10px);
+}
+
+.banner-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+h1 {
+    font-size: 4em;
+    margin-bottom: 25px;
+    color: #3a1c71;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+p {
+    font-size: 1.5em;
+    margin-bottom: 35px;
+    color: #555;
+}
+
+.menu-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    justify-content: center;
+}
+
+.card-item {
+    background: #fff;
+    border-radius: 25px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.card-item:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+.card-item img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 20px;
+}
+
+.card-item h3 {
+    font-size: 1.8em;
+    margin: 0;
+    padding: 0 20px;
+    color: #3a1c71;
+}
+
+@media (max-width: 768px) {
+    .menu-container {
+        padding: 25px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    .menu-cards {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .card-item img {
+        height: 220px;
+    }
+
+    .card-item h3 {
+        font-size: 1.6em;
+    }
+}
