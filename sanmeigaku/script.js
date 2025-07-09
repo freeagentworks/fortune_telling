@@ -214,35 +214,141 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// 十干と十二支の定義
+const tenStems = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+const twelveBranches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+
+// 干支の五行対応
+const stemElements = {
+    '甲': '木', '乙': '木', '丙': '火', '丁': '火', '戊': '土', 
+    '己': '土', '庚': '金', '辛': '金', '壬': '水', '癸': '水'
+};
+
+const branchElements = {
+    '子': '水', '丑': '土', '寅': '木', '卯': '木', '辰': '土', '巳': '火',
+    '午': '火', '未': '土', '申': '金', '酉': '金', '戌': '土', '亥': '水'
+};
+
+// 日干から十大主星への変換テーブル
+const stemToStarMap = {
+    '甲': {'甲': '貫索星', '乙': '石門星', '丙': '鳳閣星', '丁': '調舒星', '戊': '禄存星', '己': '司禄星', '庚': '車騎星', '辛': '牽牛星', '壬': '龍高星', '癸': '玉堂星'},
+    '乙': {'甲': '石門星', '乙': '貫索星', '丙': '調舒星', '丁': '鳳閣星', '戊': '司禄星', '己': '禄存星', '庚': '牽牛星', '辛': '車騎星', '壬': '玉堂星', '癸': '龍高星'},
+    '丙': {'甲': '玉堂星', '乙': '龍高星', '丙': '貫索星', '丁': '石門星', '戊': '鳳閣星', '己': '調舒星', '庚': '禄存星', '辛': '司禄星', '壬': '車騎星', '癸': '牽牛星'},
+    '丁': {'甲': '龍高星', '乙': '玉堂星', '丙': '石門星', '丁': '貫索星', '戊': '調舒星', '己': '鳳閣星', '庚': '司禄星', '辛': '禄存星', '壬': '牽牛星', '癸': '車騎星'},
+    '戊': {'甲': '牽牛星', '乙': '車騎星', '丙': '司禄星', '丁': '禄存星', '戊': '貫索星', '己': '石門星', '庚': '鳳閣星', '辛': '調舒星', '壬': '龍高星', '癸': '玉堂星'},
+    '己': {'甲': '車騎星', '乙': '牽牛星', '丙': '禄存星', '丁': '司禄星', '戊': '石門星', '己': '貫索星', '庚': '調舒星', '辛': '鳳閣星', '壬': '玉堂星', '癸': '龍高星'},
+    '庚': {'甲': '調舒星', '乙': '鳳閣星', '丙': '玉堂星', '丁': '龍高星', '戊': '牽牛星', '己': '車騎星', '庚': '貫索星', '辛': '石門星', '壬': '司禄星', '癸': '禄存星'},
+    '辛': {'甲': '鳳閣星', '乙': '調舒星', '丙': '龍高星', '丁': '玉堂星', '戊': '車騎星', '己': '牽牛星', '庚': '石門星', '辛': '貫索星', '壬': '禄存星', '癸': '司禄星'},
+    '壬': {'甲': '司禄星', '乙': '禄存星', '丙': '牽牛星', '丁': '車騎星', '戊': '調舒星', '己': '鳳閣星', '庚': '玉堂星', '辛': '龍高星', '壬': '貫索星', '癸': '石門星'},
+    '癸': {'甲': '禄存星', '乙': '司禄星', '丙': '車騎星', '丁': '牽牛星', '戊': '鳳閣星', '己': '調舒星', '庚': '龍高星', '辛': '玉堂星', '壬': '石門星', '癸': '貫索星'}
+};
+
+// 日支から十二大従星への変換テーブル
+const branchToSubStarMap = {
+    '子': {'子': '天庫星', '丑': '天印星', '寅': '天貴星', '卯': '天恍星', '辰': '天南星', '巳': '天禄星', '午': '天将星', '未': '天堂星', '申': '天胡星', '酉': '天極星', '戌': '天馳星', '亥': '天報星'},
+    '丑': {'子': '天印星', '丑': '天庫星', '寅': '天報星', '卯': '天貴星', '辰': '天恍星', '巳': '天南星', '午': '天禄星', '未': '天将星', '申': '天堂星', '酉': '天胡星', '戌': '天極星', '亥': '天馳星'},
+    '寅': {'子': '天貴星', '丑': '天報星', '寅': '天庫星', '卯': '天印星', '辰': '天貴星', '巳': '天恍星', '午': '天南星', '未': '天禄星', '申': '天将星', '酉': '天堂星', '戌': '天胡星', '亥': '天極星'},
+    '卯': {'子': '天恍星', '丑': '天貴星', '寅': '天印星', '卯': '天庫星', '辰': '天報星', '巳': '天貴星', '午': '天恍星', '未': '天南星', '申': '天禄星', '酉': '天将星', '戌': '天堂星', '亥': '天胡星'},
+    '辰': {'子': '天南星', '丑': '天恍星', '寅': '天貴星', '卯': '天報星', '辰': '天庫星', '巳': '天印星', '午': '天貴星', '未': '天恍星', '申': '天南星', '酉': '天禄星', '戌': '天将星', '亥': '天堂星'},
+    '巳': {'子': '天禄星', '丑': '天南星', '寅': '天恍星', '卯': '天貴星', '辰': '天印星', '巳': '天庫星', '午': '天報星', '未': '天貴星', '申': '天恍星', '酉': '天南星', '戌': '天禄星', '亥': '天将星'},
+    '午': {'子': '天将星', '丑': '天禄星', '寅': '天南星', '卯': '天恍星', '辰': '天貴星', '巳': '天報星', '午': '天庫星', '未': '天印星', '申': '天貴星', '酉': '天恍星', '戌': '天南星', '亥': '天禄星'},
+    '未': {'子': '天堂星', '丑': '天将星', '寅': '天禄星', '卯': '天南星', '辰': '天恍星', '巳': '天貴星', '午': '天印星', '未': '天庫星', '申': '天報星', '酉': '天貴星', '戌': '天恍星', '亥': '天南星'},
+    '申': {'子': '天胡星', '丑': '天堂星', '寅': '天将星', '卯': '天禄星', '辰': '天南星', '巳': '天恍星', '午': '天貴星', '未': '天報星', '申': '天庫星', '酉': '天印星', '戌': '天貴星', '亥': '天恍星'},
+    '酉': {'子': '天極星', '丑': '天胡星', '寅': '天堂星', '卯': '天将星', '辰': '天禄星', '巳': '天南星', '午': '天恍星', '未': '天貴星', '申': '天印星', '酉': '天庫星', '戌': '天報星', '亥': '天貴星'},
+    '戌': {'子': '天馳星', '丑': '天極星', '寅': '天胡星', '卯': '天堂星', '辰': '天将星', '巳': '天禄星', '午': '天南星', '未': '天恍星', '申': '天貴星', '酉': '天報星', '戌': '天庫星', '亥': '天印星'},
+    '亥': {'子': '天報星', '丑': '天馳星', '寅': '天極星', '卯': '天胡星', '辰': '天堂星', '巳': '天将星', '午': '天禄星', '未': '天南星', '申': '天恍星', '酉': '天貴星', '戌': '天印星', '亥': '天庫星'}
+};
+
+// 天中殺の計算用
+const tenchusatsuMap = {
+    '甲子': '戌亥', '乙丑': '戌亥', '丙寅': '子丑', '丁卯': '子丑', '戊辰': '寅卯', '己巳': '寅卯',
+    '庚午': '辰巳', '辛未': '辰巳', '壬申': '午未', '癸酉': '午未', '甲戌': '申酉', '乙亥': '申酉',
+    '丙子': '戌亥', '丁丑': '戌亥', '戊寅': '子丑', '己卯': '子丑', '庚辰': '寅卯', '辛巳': '寅卯',
+    '壬午': '辰巳', '癸未': '辰巳', '甲申': '午未', '乙酉': '午未', '丙戌': '申酉', '丁亥': '申酉',
+    '戊子': '戌亥', '己丑': '戌亥', '庚寅': '子丑', '辛卯': '子丑', '壬辰': '寅卯', '癸巳': '寅卯',
+    '甲午': '辰巳', '乙未': '辰巳', '丙申': '午未', '丁酉': '午未', '戊戌': '申酉', '己亥': '申酉',
+    '庚子': '戌亥', '辛丑': '戌亥', '壬寅': '子丑', '癸卯': '子丑', '甲辰': '寅卯', '乙巳': '寅卯',
+    '丙午': '辰巳', '丁未': '辰巳', '戊申': '午未', '己酉': '午未', '庚戌': '申酉', '辛亥': '申酉',
+    '壬子': '戌亥', '癸丑': '戌亥', '甲寅': '子丑', '乙卯': '子丑', '丙辰': '寅卯', '丁巳': '寅卯',
+    '戊午': '辰巳', '己未': '辰巳', '庚申': '午未', '辛酉': '午未', '壬戌': '申酉', '癸亥': '申酉'
+};
+
+// 日の干支を計算する関数
+function calculateDayStem(year, month, day) {
+    // 基準日（1900年1月1日）からの経過日数を計算
+    const baseDate = new Date(1900, 0, 1);
+    const targetDate = new Date(year, month - 1, day);
+    const daysDiff = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
+    
+    // 1900年1月1日は庚子の日（庚=6, 子=0）
+    const baseStemIndex = 6;
+    const baseBranchIndex = 0;
+    
+    const stemIndex = (baseStemIndex + daysDiff) % 10;
+    const branchIndex = (baseBranchIndex + daysDiff) % 12;
+    
+    return {
+        stem: tenStems[stemIndex],
+        branch: twelveBranches[branchIndex]
+    };
+}
+
+// 年・月の干支を簡易計算する関数
+function calculateYearMonthStem(year, month) {
+    // 簡易的な計算（実際はより複雑）
+    const yearStemIndex = (year - 1900) % 10;
+    const yearBranchIndex = (year - 1900) % 12;
+    
+    const monthStemIndex = (yearStemIndex * 2 + month - 1) % 10;
+    const monthBranchIndex = (month - 1) % 12;
+    
+    return {
+        yearStem: tenStems[yearStemIndex],
+        yearBranch: twelveBranches[yearBranchIndex],
+        monthStem: tenStems[monthStemIndex],
+        monthBranch: twelveBranches[monthBranchIndex]
+    };
+}
+
 // 算命学の計算
 function calculateSanmeigaku() {
     const year = parseInt(document.getElementById('year').value);
     const month = parseInt(document.getElementById('month').value);
     const day = parseInt(document.getElementById('day').value);
 
-    // ランダムに星を選択（実際の算命学では複雑な計算が必要）
-    const mainStarNames = Object.keys(tenMainStars);
-    const subStarNames = Object.keys(twelveSubStars);
+    // 日の干支を計算
+    const dayStem = calculateDayStem(year, month, day);
+    const yearMonthStem = calculateYearMonthStem(year, month);
     
-    // 人体星図の5つの星を選択
+    // 陰占（干支の配置）
+    const insenData = {
+        yearStem: yearMonthStem.yearStem,
+        yearBranch: yearMonthStem.yearBranch,
+        monthStem: yearMonthStem.monthStem,
+        monthBranch: yearMonthStem.monthBranch,
+        dayStem: dayStem.stem,
+        dayBranch: dayStem.branch
+    };
+    
+    // 陽占（人体星図）の計算
     const selectedMainStars = {
-        north: mainStarNames[(year + month) % mainStarNames.length],
-        east: mainStarNames[(month + day) % mainStarNames.length],
-        center: mainStarNames[(year + month + day) % mainStarNames.length],
-        west: mainStarNames[(year * 2 + day) % mainStarNames.length],
-        south: mainStarNames[(month * 2 + day) % mainStarNames.length]
+        north: stemToStarMap[insenData.dayStem][insenData.yearStem],
+        east: stemToStarMap[insenData.dayStem][insenData.monthStem],
+        center: stemToStarMap[insenData.dayStem][insenData.dayStem],
+        west: stemToStarMap[insenData.dayStem][insenData.monthStem],
+        south: stemToStarMap[insenData.dayStem][insenData.yearStem]
     };
 
-    // 十二大従星の3つを選択
+    // 十二大従星の計算
     const selectedSubStars = {
-        leftShoulder: subStarNames[(year + month) % subStarNames.length],
-        leftFoot: subStarNames[(month + day) % subStarNames.length],
-        rightFoot: subStarNames[(year + day) % subStarNames.length]
+        leftShoulder: branchToSubStarMap[insenData.dayBranch][insenData.yearBranch],
+        leftFoot: branchToSubStarMap[insenData.dayBranch][insenData.monthBranch],
+        rightFoot: branchToSubStarMap[insenData.dayBranch][insenData.dayBranch]
     };
 
-    // 天中殺を計算
-    const tenchusatsuTypeNames = Object.keys(tenchusatsuTypes);
-    const tenchusatsuType = tenchusatsuTypeNames[(year + month + day) % tenchusatsuTypeNames.length];
+    // 天中殺の計算
+    const dayColumn = insenData.dayStem + insenData.dayBranch;
+    const tenchusatsuType = tenchusatsuMap[dayColumn] || '戌亥';
 
     // 結果を表示
     displayResults(selectedMainStars, selectedSubStars, tenchusatsuType);
