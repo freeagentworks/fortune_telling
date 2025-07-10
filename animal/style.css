@@ -1,0 +1,375 @@
+/* 可愛い動物占いアプリのスタイル */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: linear-gradient(135deg, #ffeef8 0%, #f0e6ff 50%, #e6f3ff 100%);
+    min-height: 100vh;
+    color: #5a4b6b;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+}
+
+.title-container {
+    background: linear-gradient(135deg, #ff9eb5 0%, #ffc3d8 50%, #e6f3ff 100%);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(255, 158, 181, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.title-container::before {
+    content: '✨🌟✨🌟✨';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+.title-container::after {
+    content: '🌸🦋🌸🦋🌸';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(90, 75, 107, 0.3);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* メインコンテンツ */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 入力セクション */
+.input-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(90, 75, 107, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.form-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #8b7aa8;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #6b5b73;
+    margin-bottom: 8px;
+    padding-left: 5px;
+}
+
+.select-input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: 2px solid #e6d9f0;
+    border-radius: 15px;
+    background: #fff;
+    color: #5a4b6b;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d1a7dc' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 45px;
+}
+
+.select-input:focus {
+    outline: none;
+    border-color: #d1a7dc;
+    box-shadow: 0 0 0 3px rgba(209, 167, 220, 0.2);
+    transform: translateY(-2px);
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #ff9eb5 0%, #d1a7dc 100%);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 8px 25px rgba(255, 158, 181, 0.3);
+}
+
+.calculate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 158, 181, 0.4);
+}
+
+.calculate-btn:active {
+    transform: translateY(-1px);
+}
+
+/* 結果セクション */
+.result-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(90, 75, 107, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    animation: slideIn 0.6s ease-out;
+}
+
+.result-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #8b7aa8;
+    margin-bottom: 30px;
+}
+
+.animal-card {
+    background: linear-gradient(135deg, #fff 0%, #faf8ff 100%);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(90, 75, 107, 0.1);
+    border: 2px solid #f0ebf7;
+    margin-bottom: 30px;
+}
+
+.animal-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.animal-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #6b5b73;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ff9eb5, #d1a7dc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.animal-details {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.detail-item {
+    background: #f8f5fb;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid #d1a7dc;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #8b7aa8;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    color: #5a4b6b;
+    line-height: 1.5;
+}
+
+.reset-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #8b7aa8;
+    background: #fff;
+    border: 2px solid #d1a7dc;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    background: #d1a7dc;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* フッター */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+}
+
+.footer p {
+    font-size: 1rem;
+    color: #8b7aa8;
+    font-weight: 400;
+}
+
+/* ユーティリティクラス */
+.hidden {
+    display: none;
+}
+
+/* アニメーション */
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .input-section, .result-section {
+        padding: 25px;
+    }
+    
+    .form-title, .result-title {
+        font-size: 1.5rem;
+    }
+    
+    .animal-icon {
+        font-size: 3rem;
+    }
+    
+    .animal-name {
+        font-size: 1.5rem;
+    }
+    
+    .detail-item {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .title-container {
+        padding: 20px;
+    }
+    
+    .main-title {
+        font-size: 1.8rem;
+    }
+    
+    .input-section, .result-section {
+        padding: 20px;
+    }
+    
+    .form-title, .result-title {
+        font-size: 1.3rem;
+    }
+    
+    .animal-icon {
+        font-size: 2.5rem;
+    }
+    
+    .animal-name {
+        font-size: 1.3rem;
+    }
+    
+    .select-input {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .calculate-btn {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+}

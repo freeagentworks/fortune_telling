@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ルノルマンカード占い✨ - 可愛い占いアプリ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="sparkle">✨</span>
+                    ルノルマンカード占い
+                    <span class="sparkle">✨</span>
+                </h1>
+                <p class="subtitle">あなたの未来を美しく導く神秘の36枚</p>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="main">
+            <!-- 占い選択画面 -->
+            <div id="divination-select" class="section active">
+                <div class="welcome-message">
+                    <h2 class="section-title">どんな占いをしますか？</h2>
+                    <p class="description">お好きな占い方法を選んでください💫</p>
+                </div>
+                
+                <div class="divination-options">
+                    <div class="option-card" onclick="startDivination('one')">
+                        <div class="option-icon">🔮</div>
+                        <h3>ワンカード占い</h3>
+                        <p>今日の運勢やシンプルな質問に</p>
+                        <div class="card-count">1枚</div>
+                    </div>
+                    
+                    <div class="option-card" onclick="startDivination('three')">
+                        <div class="option-icon">🌸</div>
+                        <h3>スリーカード占い</h3>
+                        <p>過去・現在・未来を詳しく</p>
+                        <div class="card-count">3枚</div>
+                    </div>
+                    
+                    <div class="option-card" onclick="startDivination('nine')">
+                        <div class="option-icon">🌟</div>
+                        <h3>ナインカード占い</h3>
+                        <p>深い洞察と詳細な分析</p>
+                        <div class="card-count">9枚</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 質問入力画面 -->
+            <div id="question-input" class="section">
+                <div class="question-form">
+                    <h2 class="section-title">質問を入力してください</h2>
+                    <p class="description">心の中で質問を思い浮かべながら入力してください💭</p>
+                    
+                    <div class="input-group">
+                        <label for="question">あなたの質問</label>
+                        <textarea id="question" placeholder="例：今日の運勢は？&#10;例：彼との関係はどうなる？&#10;例：転職するべき？" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary" onclick="goBack()">戻る</button>
+                        <button class="btn btn-primary" onclick="startCardDraw()">カードを引く</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カード選択画面 -->
+            <div id="card-selection" class="section">
+                <div class="card-draw-area">
+                    <h2 class="section-title">カードを選んでください</h2>
+                    <p class="description" id="selection-description">心の声に従って、直感でカードを選んでください✨</p>
+                    
+                    <div id="card-deck" class="card-deck">
+                        <!-- カードがJavaScriptで生成される -->
+                    </div>
+                    
+                    <div class="selection-info">
+                        <span id="selection-count">選択されたカード: 0</span>
+                        <span id="selection-needed"></span>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary" onclick="goBack()">戻る</button>
+                        <button class="btn btn-primary" id="reveal-btn" onclick="revealCards()" disabled>結果を見る</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 結果表示画面 -->
+            <div id="result-display" class="section">
+                <div class="result-content">
+                    <h2 class="section-title">占い結果</h2>
+                    <div id="user-question" class="user-question"></div>
+                    
+                    <div id="result-cards" class="result-cards">
+                        <!-- 結果カードがJavaScriptで生成される -->
+                    </div>
+                    
+                    <div id="interpretation" class="interpretation">
+                        <!-- 解釈がJavaScriptで生成される -->
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary" onclick="resetDivination()">もう一度占う</button>
+                        <button class="btn btn-primary" onclick="shareDivination()">結果をシェア</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <p>&copy; 2025 ルノルマンカード占い - あなたの幸せを願って 💖</p>
+        </footer>
+    </div>
+
+    <!-- モーダル -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

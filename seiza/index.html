@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西洋占星術 - 12星座占い</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ 西洋占星術 12星座占い ✨</h1>
+            <p class="subtitle">あなたの運勢を星が導きます</p>
+        </header>
+
+        <main>
+            <!-- 生年月日入力セクション -->
+            <section class="input-section">
+                <h2>生年月日を入力してください</h2>
+                <div class="date-input">
+                    <input type="date" id="birthdate" min="1900-01-01" max="2025-12-31">
+                    <button onclick="showHoroscope()">占う</button>
+                </div>
+            </section>
+
+            <!-- 占い結果セクション -->
+            <section id="result-section" class="result-section hidden">
+                <div class="zodiac-info">
+                    <div class="zodiac-symbol" id="zodiac-symbol"></div>
+                    <h2 id="zodiac-name"></h2>
+                    <p id="zodiac-date"></p>
+                    <p id="zodiac-element"></p>
+                </div>
+
+                <div class="fortune-cards">
+                    <div class="fortune-card">
+                        <h3>💫 総合運</h3>
+                        <div class="stars" id="general-stars"></div>
+                        <p id="general-fortune"></p>
+                    </div>
+
+                    <div class="fortune-card">
+                        <h3>💕 恋愛運</h3>
+                        <div class="stars" id="love-stars"></div>
+                        <p id="love-fortune"></p>
+                    </div>
+
+                    <div class="fortune-card">
+                        <h3>💼 仕事運</h3>
+                        <div class="stars" id="work-stars"></div>
+                        <p id="work-fortune"></p>
+                    </div>
+
+                    <div class="fortune-card">
+                        <h3>💰 金運</h3>
+                        <div class="stars" id="money-stars"></div>
+                        <p id="money-fortune"></p>
+                    </div>
+                </div>
+
+                <div class="lucky-items">
+                    <h3>🍀 ラッキーアイテム</h3>
+                    <div class="lucky-grid">
+                        <div class="lucky-item">
+                            <span class="label">色</span>
+                            <span id="lucky-color"></span>
+                        </div>
+                        <div class="lucky-item">
+                            <span class="label">数字</span>
+                            <span id="lucky-number"></span>
+                        </div>
+                        <div class="lucky-item">
+                            <span class="label">アイテム</span>
+                            <span id="lucky-item"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="back-button" onclick="reset()">もう一度占う</button>
+            </section>
+
+            <!-- 12星座一覧セクション -->
+            <section class="zodiac-list-section">
+                <h2>12星座一覧</h2>
+                <div class="zodiac-grid">
+                    <div class="zodiac-item" onclick="showZodiacInfo('aries')">
+                        <div class="zodiac-icon">♈</div>
+                        <p>牡羊座</p>
+                        <small>3/21-4/19</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('taurus')">
+                        <div class="zodiac-icon">♉</div>
+                        <p>牡牛座</p>
+                        <small>4/20-5/20</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('gemini')">
+                        <div class="zodiac-icon">♊</div>
+                        <p>双子座</p>
+                        <small>5/21-6/21</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('cancer')">
+                        <div class="zodiac-icon">♋</div>
+                        <p>蟹座</p>
+                        <small>6/22-7/22</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('leo')">
+                        <div class="zodiac-icon">♌</div>
+                        <p>獅子座</p>
+                        <small>7/23-8/22</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('virgo')">
+                        <div class="zodiac-icon">♍</div>
+                        <p>乙女座</p>
+                        <small>8/23-9/22</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('libra')">
+                        <div class="zodiac-icon">♎</div>
+                        <p>天秤座</p>
+                        <small>9/23-10/23</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('scorpio')">
+                        <div class="zodiac-icon">♏</div>
+                        <p>蠍座</p>
+                        <small>10/24-11/22</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('sagittarius')">
+                        <div class="zodiac-icon">♐</div>
+                        <p>射手座</p>
+                        <small>11/23-12/21</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('capricorn')">
+                        <div class="zodiac-icon">♑</div>
+                        <p>山羊座</p>
+                        <small>12/22-1/19</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('aquarius')">
+                        <div class="zodiac-icon">♒</div>
+                        <p>水瓶座</p>
+                        <small>1/20-2/18</small>
+                    </div>
+                    <div class="zodiac-item" onclick="showZodiacInfo('pisces')">
+                        <div class="zodiac-icon">♓</div>
+                        <p>魚座</p>
+                        <small>2/19-3/20</small>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 西洋占星術 12星座占い</p>
+        </footer>
+    </div>
+
+    <!-- 星座詳細モーダル -->
+    <div id="zodiac-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
